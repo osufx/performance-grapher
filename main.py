@@ -19,7 +19,13 @@ def svg(id, mode=0):
         if mode > 3 or mode < 0:
             mode = 0
 
-    return svgHandle.handle(id, mode)
+    is_valid, data = svgHandle.handle(id, mode)
+
+    if is_valid:
+        headers = {'Content-type': 'image/svg+xml'}
+    else:
+        headers = {'Content-type': 'raw'}
+    return data, 200, headers
 
 if __name__ == "__main__":
     with open("template.svg", "r") as f:
