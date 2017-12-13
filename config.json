@@ -1,5 +1,9 @@
 {
-    "debug": true,
     "port": 5920,
-    "ssl": false
+    "ssl": false,
+    "sql_host": "127.0.0.1",
+    "sql_usr": "root",
+    "sql_psw": "meme",
+    "sql_db": "performance-grapher",
+    "debug": true
 }

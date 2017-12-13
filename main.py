@@ -1,6 +1,7 @@
 from flask import Flask, render_template, make_response, redirect, request
 import ssl
 import json
+import pymysql
 
 from objects import glob
 from handlers import svgHandle
@@ -30,6 +31,10 @@ def svg(id, mode=0):
 if __name__ == "__main__":
     with open("template.svg", "r") as f:
         glob.svg_template = f.read()
+
+    glob.sql = pymysql.connect(host=config['sql_host'], user=config['sql_usr'], passwd=config['sql_psw'], db=config['sql_db'], charset='utf8')
+    glob.sql.autocommit(True)
+    glob.sqlc = glob.sql.cursor(pymysql.cursors.DictCursor)
 
     if config["ssl"]:
         context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
