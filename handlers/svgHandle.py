@@ -38,7 +38,6 @@ def handle(id, mode):
         y = row["rank"] - rank_lowest
         path.append(x)
         path.append(y)
-        row = glob.sqlc.fetchone()
     
     print("date_start: {}".format(date_start))
     print("rank_start: {}".format(rank_start))
