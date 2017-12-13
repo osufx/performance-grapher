@@ -23,19 +23,19 @@ def handle(id, mode):
     
     tmp_highest = view_highest
     while view_highest <= rank_highest:
-        tmp_highest += round(rank_start, -len(str(rank_start)) + 2)
+        tmp_highest += round(rank_start, -len(str(rank_start)) + 2)/10
         view_highest = round(tmp_highest, -len(str(rank_start)) + 1)
     
     tmp_lowest = view_lowest
     while view_lowest >= rank_lowest:
-        tmp_lowest -= round(rank_start, -len(str(rank_start)) + 2)
+        tmp_lowest -= round(rank_start, -len(str(rank_start)) + 2)/10
         view_lowest = round(tmp_lowest, -len(str(rank_start)) + 1)
 
     view_middle = round((view_highest + view_lowest) / 2, 0)
 
     for row in rows:
-        x = (row["date"].day - date_start.day) * 24
-        y = row["rank"] - rank_lowest
+        x = (row["date"].timestamp() - date_start.timestamp()) * 0.0001
+        y = (row["rank"] - view_lowest) * 0.1
         path.append(x)
         path.append(y)
     
@@ -48,5 +48,5 @@ def handle(id, mode):
     print("view_lowest: {}".format(view_lowest))
     print("path: {}".format(path))
 
-    data = glob.svg_template.replace("{{PATH}}", ','.join(str(x) for x in [0,0, 20,20, 80,20]))
+    data = glob.svg_template.replace("{{PATH}}", ','.join(str(x) for x in path))
     return True, data
