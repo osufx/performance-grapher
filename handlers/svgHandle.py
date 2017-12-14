@@ -62,7 +62,7 @@ def handle(id, mode):
     svg_path.append(str(path[1]))
     is_curve = False
     i = 2
-    while i < len(path) - 4:
+    while i < len(path) - 3:
     #for i in range(2,len(path)-4):
         if not is_curve:
             x = "C" + str(path[i])
