@@ -9,7 +9,7 @@ def handle(id, mode):
 
     path = []
 
-    sqlHelper.execute("SELECT rank, date FROM data WHERE user_id = {} ORDER BY date".format(id))
+    sqlHelper.execute("SELECT rank, date FROM data WHERE user_id = {} AND date BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY date".format(id))
     rows = glob.sqlc.fetchall()
 
     if len(rows) == 0:
