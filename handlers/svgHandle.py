@@ -37,6 +37,11 @@ def handle(id, mode):
 
     view_middle = round((view_highest + view_lowest) / 2, 0)
 
+    #Make into ints
+    view_highest = int(view_highest)
+    view_middle = int(view_middle)
+    view_lowest = int(view_lowest)
+
     for row in rows:
         x = (row["date"].timestamp() - date_start.timestamp()) * 0.0001
         y = (row["rank"] - view_lowest) * 0.1
@@ -53,4 +58,5 @@ def handle(id, mode):
     print("path: {}".format(path))
     
     data = glob.svg_template.replace("{{PATH}}", ','.join(str(x) for x in path))
+    data = data.replace("{{VIEW_LOWEST}}", str(view_lowest)).replace("{{VIEW_MIDDLE}}", str(view_middle)).replace("{{VIEW_HIGHEST}}", str(view_highest))
     return True, data
