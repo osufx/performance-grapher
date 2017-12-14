@@ -56,7 +56,40 @@ def handle(id, mode):
     print("view_highest: {}".format(view_highest))
     print("view_lowest: {}".format(view_lowest))
     print("path: {}".format(path))
+
+    svg_path = []
+    svg_path.append("M" + str(path[0]))
+    svg_path.append(str(path[1]))
+    is_curve = False
+    i = 2
+    while i < len(path) - 4:
+    #for i in range(2,len(path)-4):
+        if not is_curve:
+            x = "C" + str(path[i])
+            is_curve = False
+        else:
+            x = str(path[i])
+        y = str(path[i + 1])
+
+        svg_path.append(x)
+        svg_path.append(y)
+
+        #X axis
+        xQ1 = (path[i] + path[i + 2]) / 2
+        xQ0 = (xQ1 + path[i]) / 2
+        xQ2 = (xQ1 + path[i + 2]) / 2
+
+        #Y axis
+        yQ1 = (path[i + 1] + path[i + 3]) / 2
+        #yQ0 = (yQ1 + path[i + 1]) / 2
+        #yQ2 = (yQ1 + path[i + 3]) / 2
+
+        svg_path += [str(xQ0), y, str(xQ1), str(yQ1), str(xQ1), str(yQ1), str(xQ2), str(path[i + 3])] + [str(path[i + 2]), str(path[i + 3])]
+
+        i += 2
+
+    print("svg_path: {}".format(svg_path))
     
-    data = glob.svg_template.replace("{{PATH}}", ','.join(str(x) for x in path))
+    data = glob.svg_template.replace("{{PATH}}", ','.join(svg_path))
     data = data.replace("{{VIEW_LOWEST}}", str(view_lowest)).replace("{{VIEW_MIDDLE}}", str(view_middle)).replace("{{VIEW_HIGHEST}}", str(view_highest))
     return True, data
