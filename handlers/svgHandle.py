@@ -57,36 +57,40 @@ def handle(id, mode):
     print("view_lowest: {}".format(view_lowest))
     print("path: {}".format(path))
 
+
     svg_path = []
-    svg_path.append("M" + str(path[0]))
+    svg_path.append("M0")
     svg_path.append(str(path[1]))
-    is_curve = False
-    i = 2
-    while i < len(path) - 3:
-    #for i in range(2,len(path)-4):
-        if not is_curve:
+    if len(path) <= 4:
+        #We dont have enough points to start curving
+        svg_path.append(str(path[0]))
+        svg_path.append(str(path[1]))
+        if len(path) == 4:
+            svg_path.append(str(path[2]))
+            svg_path.append(str(path[3]))
+    else:
+        #We can start curving paths
+        i = 2
+        while i < len(path) - 3:
             x = "C" + str(path[i])
-            is_curve = False
-        else:
-            x = str(path[i])
-        y = str(path[i + 1])
+            y = str(path[i + 1])
 
-        svg_path.append(x)
-        svg_path.append(y)
+            svg_path.append(x)
+            svg_path.append(y)
 
-        #X axis
-        xQ1 = (path[i] + path[i + 2]) / 2
-        xQ0 = (xQ1 + path[i]) / 2
-        xQ2 = (xQ1 + path[i + 2]) / 2
+            #X axis
+            xQ1 = (path[i] + path[i + 2]) / 2
+            xQ0 = (xQ1 + path[i]) / 2
+            xQ2 = (xQ1 + path[i + 2]) / 2
 
-        #Y axis
-        yQ1 = (path[i + 1] + path[i + 3]) / 2
-        #yQ0 = (yQ1 + path[i + 1]) / 2
-        #yQ2 = (yQ1 + path[i + 3]) / 2
+            #Y axis
+            yQ1 = (path[i + 1] + path[i + 3]) / 2
+            #yQ0 = (yQ1 + path[i + 1]) / 2
+            #yQ2 = (yQ1 + path[i + 3]) / 2
 
-        svg_path += [str(xQ0), y, str(xQ1), str(yQ1), str(xQ1), str(yQ1), str(xQ2), str(path[i + 3])] + [str(path[i + 2]), str(path[i + 3])]
+            svg_path += [str(xQ0), y, str(xQ1), str(yQ1), str(xQ1), str(yQ1), str(xQ2), str(path[i + 3])] + [str(path[i + 2]), str(path[i + 3])]
 
-        i += 2
+            i += 2
 
     print("svg_path: {}".format(svg_path))
     

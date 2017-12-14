@@ -3,7 +3,7 @@
     "ssl": false,
     "sql_host": "127.0.0.1",
     "sql_usr": "root",
-    "sql_psw": "meme",
+    "sql_psw": "toor",
     "sql_db": "performance-grapher",
     "debug": true
 }
