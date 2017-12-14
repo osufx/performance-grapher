@@ -9,7 +9,8 @@ def handle(id, mode):
 
     path = []
 
-    sqlHelper.execute("SELECT rank, date FROM data WHERE user_id = {} AND date BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY date".format(id))
+    #sqlHelper.execute("SELECT rank, date FROM data WHERE user_id = {} AND date BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() ORDER BY date".format(id))
+    sqlHelper.execute("SELECT rank, date FROM data WHERE user_id = {} ORDER BY date".format(id))
     rows = glob.sqlc.fetchall()
 
     if len(rows) == 0:
@@ -43,10 +44,19 @@ def handle(id, mode):
     view_lowest = int(view_lowest)
 
     for row in rows:
-        x = (row["date"].timestamp() - date_start.timestamp()) * 0.0001
+        x = (row["date"].timestamp() - date_start.timestamp()) * 0.000141
         y = (row["rank"] - view_lowest) * 0.1
         path.append(x)
         path.append(y)
+
+    #Shift path X axis
+    count = int(len(path) / 2)
+    shift = 30 - count
+    x = 0
+
+    #while x < len(path):
+    #    path[x] += (720 - shift * 6)
+    #    x += 2
     
     print("date_start: {}".format(date_start))
     print("rank_start: {}".format(rank_start))
