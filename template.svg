@@ -4,6 +4,7 @@
             <path style="fill:none;stroke-width:1.5px;" d="M{{PATH}}"></path>
         </g>
         <g>
+            <text x="-102" y="-100" text-anchor="middle" transform="rotate(-90 0,0)">Rank</text>
             <text x="-4" y="52" text-anchor="end" style="font-size:14px">#{{VIEW_LOWEST}}</text>
             <text x="-4" y="102" text-anchor="end" style="font-size:14px">#{{VIEW_MIDDLE}}</text>
             <text x="-4" y="152" text-anchor="end" style="font-size:14px">#{{VIEW_HIGHEST}}</text>
