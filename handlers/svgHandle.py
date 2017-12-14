@@ -9,8 +9,12 @@ def handle(id, mode):
 
     path = []
 
-    sqlHelper.execute("SELECT rank, date FROM data WHERE user_id = 1076 ORDER BY date")
+    sqlHelper.execute("SELECT rank, date FROM data WHERE user_id = {} ORDER BY date".format(id))
     rows = glob.sqlc.fetchall()
+
+    if len(rows) == 0:
+        return False, "No data found for {}".format(id)
+
     date_start = rows[0]["date"]
     rank_start = rows[0]["rank"]
     view_middle = round(rank_start, -len(str(rank_start)) + 1)
