@@ -51,6 +51,6 @@ def handle(id, mode):
     print("view_highest: {}".format(view_highest))
     print("view_lowest: {}".format(view_lowest))
     print("path: {}".format(path))
-
+    
     data = glob.svg_template.replace("{{PATH}}", ','.join(str(x) for x in path))
     return True, data

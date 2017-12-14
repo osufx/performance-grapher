@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" height="160px" width="888px">
-    <g style="stroke-opacity:1;fill-opacity:0.5;fill:rgb(255,127,14);stroke:rgb(255,127,14);">
-        <path style="fill:none;stroke-width:1.5px;" d="M{{PATH}}"></path>
-    </g>
-    <g>
-        <rect x="80" y="50" width="720" height="100" style="fill:none;stroke:black;stroke-width:3px;" />
+    <g transform="translate(120,0)">
+        <g style="stroke-opacity:1;fill-opacity:0.5;fill:rgb(255,127,14);stroke:rgb(255,127,14);">
+            <path style="fill:none;stroke-width:1.5px;" d="M{{PATH}}"></path>
+        </g>
+        <g>
+            <text x="-4" y="52" text-anchor="end" style="font-size:14px">#{{VIEW_LOWEST}}</text>
+            <text x="-4" y="102" text-anchor="end" style="font-size:14px">#{{VIEW_MIDDLE}}</text>
+            <text x="-4" y="152" text-anchor="end" style="font-size:14px">#{{VIEW_HIGHEST}}</text>
+            <rect x="0" y="50" width="720" height="100" style="fill:none;stroke:black;stroke-width:3px;" />
+        </g>
     </g>
 </svg>
