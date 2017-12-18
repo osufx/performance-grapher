@@ -94,7 +94,7 @@ def handle(id, mode):
             svg_path.append(str(path[3]))
     else:
         #We can start curving paths
-        i = 2
+        i = 0
         while i < len(path) - 3:
             x = "C" + str(path[i])
             y = str(path[i + 1])
