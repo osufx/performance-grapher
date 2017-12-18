@@ -56,13 +56,21 @@ def handle(id, mode):
     path.append(last_y)
 
     #Shift path X axis
-    count = int(len(path) / 2)
-    shift = 30 - count
-    x = 0
+    #count = int(len(path) / 2)
+    #shift = 30 - count
+    #x = 0
 
     #while x < len(path):
     #    path[x] += (720 - shift * 6)
     #    x += 2
+
+    shift = -path[-2] + 720
+
+    x = 0
+    while x < len(path):
+        path[x] += shift
+        x += 2
+
     
     print("date_start: {}".format(date_start))
     print("rank_start: {}".format(rank_start))
