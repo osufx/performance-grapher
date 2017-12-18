@@ -47,7 +47,7 @@ def handle(id, mode):
 
     for row in rows:
         x = (row["date"].timestamp() - date_start.timestamp()) * 0.000141
-        y = (row["rank"] - view_lowest) * 0.1
+        y = row["rank"] #(row["rank"] - view_lowest) * 0.1
         path.append(x)
         path.append(y)
     
@@ -71,6 +71,11 @@ def handle(id, mode):
         path[x] += shift
         x += 2
 
+    #Shift & scale y axis to right level
+    y = 1
+    while y < len(path):
+        path[y] = ((path[y] - view_lowest) / view_highest) * (view_highest / 2) #* 100
+        y += 2
     
     print("date_start: {}".format(date_start))
     print("rank_start: {}".format(rank_start))
