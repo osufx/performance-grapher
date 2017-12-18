@@ -1,3 +1,5 @@
+import time
+
 from helpers import sqlHelper
 from objects import glob
 
@@ -48,6 +50,10 @@ def handle(id, mode):
         y = (row["rank"] - view_lowest) * 0.1
         path.append(x)
         path.append(y)
+    
+    last_y = path[-1]
+    path.append((time.time() - date_start.timestamp()) * 0.000141)
+    path.append(last_y)
 
     #Shift path X axis
     count = int(len(path) / 2)
