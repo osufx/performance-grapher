@@ -20,7 +20,8 @@ def handle(id, mode):
 
     date_start = rows[0]["date"]
     rank_start = rows[0]["rank"]
-    view_middle = round(rank_start, -len(str(rank_start)) + 1)
+    
+    view_middle = round(rank_start, -len(str(rank_start)) + 1) * int(str(rank_start)[0])
 
     rank_highest = max([o["rank"] for o in rows])
     rank_lowest = min([o["rank"] for o in rows])
@@ -29,14 +30,14 @@ def handle(id, mode):
     view_lowest = view_middle
     
     tmp_highest = view_highest
-    while view_highest <= rank_highest:
-        tmp_highest += round(rank_start, -len(str(rank_start)) + 2)/10
-        view_highest = round(tmp_highest, -len(str(rank_start)) + 1)
+    while view_highest < rank_highest:
+        tmp_highest += 10 ** (len(str(rank_highest)) - 1) / 2#round(rank_start, -len(str(rank_start)) + 2)/10
+        view_highest = tmp_highest
     
     tmp_lowest = view_lowest
-    while view_lowest >= rank_lowest:
-        tmp_lowest -= round(rank_start, -len(str(rank_start)) + 2)/10
-        view_lowest = round(tmp_lowest, -len(str(rank_start)) + 1)
+    while view_lowest > rank_lowest:
+        tmp_lowest -= 10 ** (len(str(rank_lowest)) - 1) / 2
+        view_lowest = tmp_lowest
 
     view_middle = round((view_highest + view_lowest) / 2, 0)
 
@@ -75,6 +76,8 @@ def handle(id, mode):
     y = 1
     while y < len(path):
         path[y] = ((path[y] - view_lowest) / view_highest) * (view_highest / 2) #* 100
+        size = len(str(view_highest)) - 1
+        path[y] *= (100 / (10 ** size))
         y += 2
     
     print("date_start: {}".format(date_start))
